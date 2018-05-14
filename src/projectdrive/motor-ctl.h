@@ -1,3 +1,5 @@
+#ifndef __MOTOR_CTL_H__
+#define __MOTOR_CTL_H__
 //初始化电机控制口
 
 //右侧电机
@@ -89,8 +91,9 @@ void toright(int times){
 //延时
   delay(times);
 }
-void setup() {
+
 //端口初始化
+void portsetup() {
 int i=0;
 for(i=2; i<6; i++){
   pinMode(i,OUTPUT);
@@ -100,10 +103,4 @@ for(i=8; i<12; i++){
 }
 }
 
-void loop() {
-  forward(1000);
-  backward(1000);
-  toleft(1000);
-  toright(1000);
-  takebreak(1000);
-}
+#endif
