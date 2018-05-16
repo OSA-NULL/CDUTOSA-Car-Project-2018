@@ -6,7 +6,7 @@
 
 ## 成员
 - 项目组长：[汪隽劼](https://github.com/lsmind)
-- 项目成员：马恩玉、江浩俊
+- 项目成员：[马恩玉](https://github.com/xiaoxiaoali)、[江浩俊](https://github.com/JM0011)
 
 ## 进度
 - [Schedule.md](./Schedule.md): 记录以完成进度
@@ -20,8 +20,6 @@
 > [doc/materials](./doc/materials): 项目相关学习资料
 >
 > [doc/introduction](./doc/introduction): 项目说明文档（设计、功能等）、成果展示等
->
-> [doc/api](./doc/api): 模块代码接口说明文档
 
 ## 规范要求
 见 [doc/development/standard.md](./doc/development/standard.md) 。
