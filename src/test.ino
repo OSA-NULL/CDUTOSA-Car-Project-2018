@@ -9,7 +9,7 @@ int left[] = {0, 255, 255, 0};
 int right[] = {255, 0, 0, 255};
 
 void setup() {
-    portSetup(port);
+    portsetup(port);
 }
 
 void loop() {
