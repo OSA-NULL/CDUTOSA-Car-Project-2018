@@ -34,3 +34,5 @@
 # VIM backup and temporary files
 *~
 *.swp
+.#*
+*#
