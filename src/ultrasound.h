@@ -7,7 +7,7 @@ inline void
 ultraSetup(int* port)
 {
     pinMode(port[0],OUTPUT);
-    pinMOde(port[1],INPUT);
+    pinMode(port[1],INPUT);
 }
 /*
  * float distance(int* port)

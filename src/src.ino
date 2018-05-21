@@ -9,12 +9,11 @@ int ultraPort[] = {2,3};
 void setup() {
     motorSetup(motorPort);  //初始化马达端口
     ultraSetup(ultraPort);  //初始化超声波端口
-    randomSeed(millis); //随机数初始化
 }
 
-void loop() {_
+void loop() {
     if(distance(ultraPort) >= 25)
-        motorControl(motorPort, 300, FORWORD);
+        motorControl(motorPort, 300, FORWARD);
     else
         motorControl(motorPort, 200, LEFT); 
 }

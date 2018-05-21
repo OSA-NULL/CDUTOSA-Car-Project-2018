@@ -4,9 +4,9 @@
 #include <Arduino.h>
 
 enum Directions{
-    FORWARD, BACK, LEFT, RIGHT, PARK
+    FORWARD, BACK, LEFT, RIGHT, PARK, CRAZY
 };
-typedef enum Directions direction_t;
+typedef enum Directions  direction_t;
 
 /*
  * void motorControl(int* port, int times, int* degree)

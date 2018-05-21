@@ -8,7 +8,7 @@ motorControl(int* port, int times, direction_t direction)
         {0, 128, 0, 128},
         {0, 128, 128, 0},
         {128, 0, 0, 128},
-        {0, 0, 0, 0}
+        {0, 0, 0, 0},
     };
 
     for(int i = 0; i < 3; i++){ 
