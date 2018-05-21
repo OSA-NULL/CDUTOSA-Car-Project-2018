@@ -3,6 +3,12 @@
 
 #include <Arduino.h>
 
+inline void
+ultraSetup(int* port)
+{
+    pinMode(port[0],OUTPUT);
+    pinMOde(port[1],INPUT);
+}
 /*
  * float distance(int* port)
  * 功能：
@@ -13,7 +19,8 @@
  *     厘米单位距离
  */
 inline float
-distance(int* port){
+distance(int* port)
+{
     int Trig = port[0];
     int Echo = port[1];
 
