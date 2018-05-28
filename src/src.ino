@@ -15,5 +15,5 @@ void loop() {
     if(distance(ultraPort) >= 25)
         motorControl(motorPort, 300, FORWARD);
     else
-        motorControl(motorPort, 200, LEFT); 
+        motorControl(motorPort, 200, BACK); 
 }

@@ -15,5 +15,6 @@ motorControl(int* port, int times, direction_t direction)
         analogWrite(port[i], direction_arr[direction][i]);
     }
     delay(times);
+    
 }
 
