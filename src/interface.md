@@ -6,8 +6,8 @@
 
 ## 开发版
 ### ->超声波
-- 2    Trig
-- 3    Echo
+- 2           Trig
+- A1 A2 A3    Echo
 - 5V   Vcc
 - GND  GND
 ### ->光控
@@ -16,11 +16,11 @@
 - GND  GND
 ### ->电机驱动1
 - VIN  +5V
-- 5    IN4,IN1
-- 6    IN3,IN2
+- 10    IN4,IN1
+- 11    IN3,IN2
 ### ->电机驱动2
-- 10   IN4,IN2
-- 11   IN3,IN1
+- 5   IN4,IN2
+- 6   IN3,IN1
 ### ->电源
 - GND  ---
 

@@ -18,7 +18,7 @@
  */
 void ulterSetup(int* port);
 /*
- * void ulterSetup(int* port,float* distance);
+ * void distancealternate(int* port,float* distance);
  * 功能：
  *     通过超声波模块计算距离
  * 参数：
@@ -32,9 +32,9 @@ void distanceAlternate(int* port,float* distance);
  **************************************************************/
 
 /*
- * void ultrasetup(int* port, float* distance)
+ * void senSetup(int* port, float* distance)
  * 功能:
- *     初始化超声波端口
+ *     初始化光敏电阻端口
  * 参数：
  *     port:光敏电阻读取端口数组
  * 返回:
