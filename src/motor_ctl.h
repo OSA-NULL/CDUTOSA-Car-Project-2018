@@ -9,18 +9,17 @@ enum Directions{
 typedef enum Directions  direction_t;
 
 /*
- * void motorControl(int* port, int times, int* degree)
+ * void motorControl(int* port, int* degree)
  * 功能：
  *     控制小车动作
  * 参数：
  *     port:小车控制端口数组 为[右前，右后，左前，左后]
- *     times:动作持续时间
  *     degree：控制幅度(PWM值)(0~255)
  * 返回：
  *     无
  */
 void
-motorControl(int* port, int times, direction_t direction);
+motorControl(int* port, direction_t direction);
 
 /*
  * void motorSetup(int port[])

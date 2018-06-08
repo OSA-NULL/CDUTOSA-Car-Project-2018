@@ -1,24 +1,38 @@
 #include "sensor.h"
 
-void 
-ulterSetup(int* port)
+unsigned long stateTime[2][3];
+
+void
+ulterSetup(int port[][3])
 {
-    pinMode(port[0],OUTPUT);
-    for(int i=1; i <= 3; i++){
-        pinMode(port[i],INPUT); 
+  for(int i=0; i<=2; i++)
+    pinMode(port[0][i],OUTPUT);
+    pinMode(port[1][0],INPUT);
+    for(int i=1; i <= 2; i++){
+        pinMode(port[RECEIVE][i],INPUT_PULLUP);
+        attachInterrupt(digitalPinToInterrupt(port[RECEIVE][i]), stateAlternate, CHANGE);
     }
 }
 
 void
-distanceAlternate(int* port,float* distance)
+ulterSend(int Trig)
 {
-    int Trig = port[0];
-    for(int i=1; i<=3; i++){
-        digitalWrite(Trig, LOW); //给Trig发送一个低电平
-        delayMicroseconds(2);        //等待 2微妙
-        digitalWrite(Trig,HIGH); //给Trig发送一个高电平
-        delayMicroseconds(10);        //等待 10微妙
-        digitalWrite(Trig, LOW); //给Trig发送一个低电平
-        distance[i-1]= (float(pulseIn(port[i], HIGH)) * 17) / 1000;
-    }
+  int time;
+
+  digitalWrite(Trig, LOW);
+  delayMicroseconds(2);
+  digitalWrite(Trig, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(Trig, LOW);
+
+  time = micros();
+  for(int i=0; i <= 2; i++ )
+    stateTime[SEND][Trig] = time;
+}
+
+void
+stateAlternate(int echo)
+{
+  stateTime[SEND][echo] = micros();
+  ulterSend(echo);
 }

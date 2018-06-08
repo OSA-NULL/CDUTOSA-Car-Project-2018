@@ -1,32 +1,44 @@
 #ifndef __sensor_h__
 #define __sensor_h__
+#define SEND 0
+#define RECEIVE 1
 
 #include <Arduino.h>
 
 /***************************************************************
  * ultrasound    超声波模块
  **************************************************************/
-
 /*
- * void ultraSetup(int* port)
+ * void ultraSent(int Trig)
  * 功能:
- *     初始化超声波端口
+ *     发送超声波信号
  * 参数：
- *     port:超声波控制端口数组 为[Trig, Echo1,Echo2,Echo3]
+ *     Trig:超声波发送端口
  * 返回:
  *     无
  */
-void ulterSetup(int* port);
+
+void ulterSend(int Trig);
 /*
- * void distancealternate(int* port,float* distance);
- * 功能：
- *     通过超声波模块计算距离
+ * void ultraSetup(int port[][3])
+ * 功能:
+ *     初始化超声波端口
  * 参数：
- *     port:超声波控制端口数组 为[端口号, 距离]
+ *     port:超声波控制端口数组 为[[Trig], [Echo]]
+ * 返回:
+ *     无
+ */
+void ulterSetup(int port[][3]);
+/*
+ * void distancealternate(int echo);
+ * 功能：
+ *     利用中断来改变状态；
+ * 参数：
+ *     Echo:超声波接受端口数组
  * 返回：
  *     无
  */
-void distanceAlternate(int* port,float* distance);
+void stateAlternate(int echo);
 /***************************************************************
  *sensitization    光敏电阻模块
  **************************************************************/
