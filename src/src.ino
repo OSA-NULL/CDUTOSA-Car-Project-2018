@@ -24,26 +24,26 @@ void setup()
     ulterSetup(ulterPort);   //初始化超声波端口
     senSetup(senPort);       //初始化光敏电阻端口
     for(int i=0; i<=2; i++)  //发射信号
-      ulterSend(i);
+        ulterSend(i);
 }
 
 void loop()
 {
-  stateTime[RECEIVE][0] = float(pulseIn(ulterPort[0][0], HIGH)); //等待前方信号
+    stateTime[RECEIVE][0] = float(pulseIn(ulterPort[0][0], HIGH)); //等待前方信号
 #ifdef DEBUG
-  serial.println("Here is statetime");
-  for (int i=0; i<2; i++){
+/*    serial.println("Here is statetime");
+    for (int i=0; i<2; i++){
     for(int j=0; j<3; j++)
-      serial.print(stateTime[i][j]);
+        serial.print(stateTime[i][j]);
     serial.println();
-  }
+  }*/
 #endif
-  if((stateTime[SEND][0]-stateTime[RECEIVE][0]) > 600)
-    motorControl(motorPort, FORWARD);
-  else if((stateTime[SEND][1]-stateTime[RECEIVE][1]) < 600)
-    motorControl(motorPort, RIGHT);
-  else if((stateTime[SEND][2]-stateTime[RECEIVE][2]) < 600)
-    motorControl(motorPort, LEFT);
-  else
-    motorControl(motorPort, FORWARD);
+    if((stateTime[SEND][0]-stateTime[RECEIVE][0]) > 600)
+        motorControl(motorPort, FORWARD);
+    else if((stateTime[SEND][1]-stateTime[RECEIVE][1]) < 600)
+        motorControl(motorPort, RIGHT);
+    else if((stateTime[SEND][2]-stateTime[RECEIVE][2]) < 600)
+        motorControl(motorPort, LEFT);
+    else
+        motorControl(motorPort, FORWARD);
 }

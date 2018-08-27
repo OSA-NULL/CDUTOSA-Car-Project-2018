@@ -5,8 +5,8 @@ unsigned long stateTime[2][3];
 void
 ulterSetup(int port[][3])
 {
-  for(int i=0; i<=2; i++)
-    pinMode(port[0][i],OUTPUT);
+    for(int i=0; i<=2; i++)
+        pinMode(port[0][i],OUTPUT);
     pinMode(port[1][0],INPUT);
     for(int i=1; i <= 2; i++){
         pinMode(port[RECEIVE][i],INPUT_PULLUP);
@@ -17,22 +17,22 @@ ulterSetup(int port[][3])
 void
 ulterSend(int Trig)
 {
-  int time;
+    int time;
 
-  digitalWrite(Trig, LOW);
-  delayMicroseconds(2);
-  digitalWrite(Trig, HIGH);
-  delayMicroseconds(10);
-  digitalWrite(Trig, LOW);
+    digitalWrite(Trig, LOW);
+    delayMicroseconds(2);
+    digitalWrite(Trig, HIGH);
+    delayMicroseconds(10);
+    digitalWrite(Trig, LOW);
 
-  time = micros();
-  for(int i=0; i <= 2; i++ )
-    stateTime[SEND][Trig] = time;
+    time = micros();
+    for(int i=0; i <= 2; i++ )
+          stateTime[SEND][Trig] = time;
 }
 
 void
 stateAlternate(int echo)
 {
-  stateTime[SEND][echo] = micros();
-  ulterSend(echo);
+    stateTime[SEND][echo] = micros();
+    ulterSend(echo);
 }

@@ -6,10 +6,11 @@
 
 ## 开发版
 ### ->超声波
-- 2           Trig
-- A1 A2 A3    Echo
-- 5V   Vcc
-- GND  GND
+   2       |  Trig
+  ---      |  ---
+  A1 A2 A3 |   Echo
+  5V       | Vcc
+  GND      | GND
 ### ->光控
 - A0   DO
 - 5V   Vcc

@@ -55,7 +55,7 @@ void stateAlternate(int echo);
 inline void
 senSetup(int port)
 {
-  pinMode(port,INPUT);
+    pinMode(port,INPUT);
 }
 
 /*
@@ -70,7 +70,7 @@ senSetup(int port)
 inline int
 senLight(int port)
 {
-  return(analogRead(port));
+    return(analogRead(port));
 }
 
 
