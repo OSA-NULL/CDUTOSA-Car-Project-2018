@@ -5,20 +5,6 @@
 
 #include <Arduino.h>
 
-/***************************************************************
- * ultrasound    超声波模块
- **************************************************************/
-/*
- * void ultraSent(int Trig)
- * 功能:
- *     发送超声波信号
- * 参数：
- *     Trig:超声波发送端口
- * 返回:
- *     无
- */
-
-void ulterSend(int Trig);
 /*
  * void ultraSetup(int port[][3])
  * 功能:
@@ -32,13 +18,14 @@ void ulterSetup(int port[][3]);
 /*
  * float ulterDistance(int echo);
  * 功能：
- *     接受超声波距离;
+ *     输出：超声波距离
  * 参数：
- *     Echo:超声波接受端口数组
+ *     Trig：超声波发送端口
+ *     Echo：超声波接受端口
  * 返回：
- *     无
+ *     障碍物距离（cm）
  */
-float ulterDistance(int echo);
+float ulterDistance(int Trig, int echo);
 /***************************************************************
  *sensitization    光敏电阻模块
  **************************************************************/
