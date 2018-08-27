@@ -30,15 +30,15 @@ void ulterSend(int Trig);
  */
 void ulterSetup(int port[][3]);
 /*
- * void distancealternate(int echo);
+ * float ulterDistance(int echo);
  * 功能：
- *     利用中断来改变状态；
+ *     接受超声波距离;
  * 参数：
  *     Echo:超声波接受端口数组
  * 返回：
  *     无
  */
-void stateAlternate(int echo);
+float ulterDistance(int echo);
 /***************************************************************
  *sensitization    光敏电阻模块
  **************************************************************/
