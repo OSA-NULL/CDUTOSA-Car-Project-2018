@@ -16,17 +16,21 @@ ulterSetup(int port[][3])
 }
 
 float
-ulterDistance(int Trig,int Echo)
+ulterDistance(int * port)
 {
+    //定义端口
+    const static int TRIG = port[0];
+    const static int ECHO = port[1];
+    //定义变量
     float waitTime = 0;
     float distance = 0;
-    //Trig 发送信号
-    digitalWrite(Trig, LOW);
+    //TRIG 发送信号
+    digitalWrite(TRIG, LOW);
     delayMicroseconds(2);
-    digitalWrite(Trig,HIGH);
+    digitalWrite(TRIG,HIGH);
     delayMicroseconds(10);
     // 等待回声
-    waitTime = float(pulseIn(Echo, HIGH,30000));
+    waitTime = float(pulseIn(ECHO, HIGH,30000));
     // 计算距离
     distance = (waitTime * 17)/1000;
 #ifdef Debug

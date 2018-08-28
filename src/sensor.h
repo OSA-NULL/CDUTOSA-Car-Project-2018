@@ -1,8 +1,5 @@
 #ifndef __sensor_h__
 #define __sensor_h__
-#define SEND 0
-#define RECEIVE 1
-
 #include <Arduino.h>
 
 /*
@@ -10,22 +7,21 @@
  * 功能:
  *     初始化超声波端口
  * 参数：
- *     port:超声波控制端口数组 为[[Trig], [Echo]]
+ *     port:超声波控制端口数组 为[[前], [左],[右]]
  * 返回:
  *     无
  */
-void ulterSetup(int port[][3]);
+void ulterSetup(int port[][2]);
 /*
  * float ulterDistance(int echo);
  * 功能：
  *     输出：超声波距离
  * 参数：
- *     Trig：超声波发送端口
- *     Echo：超声波接受端口
+ *      port:单个超声波模块端口
  * 返回：
  *     障碍物距离（cm）
  */
-float ulterDistance(int Trig, int echo);
+float ulterDistance(int * port);
 /***************************************************************
  *sensitization    光敏电阻模块
  **************************************************************/

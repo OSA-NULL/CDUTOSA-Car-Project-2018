@@ -6,44 +6,61 @@
 //小车马达端口 [右前，右后，左前，左后]
 const int motorPort[] = {10, 11, 5, 6};
 //小车测距端口 [Trig(前，左，右), Echo(前，左，右)]
-const int ulterPort[][3] = {
-    { 7, 8, 9},
-    {A1, 3, 2}
+const int ulterPort[][2] = {
+    {7, A1},
+    {8, 3},
+    {9, 2},
 };
 //小车测光端口 [输入]
 const int senPort = A0;
-//小车的状态
-extern unsigned long stateTime[2][3];
 
 void setup()
 {
 #ifdef DEBUG
-    serial.begin(9600);
+    Serial.begin(9600);
 #endif
     motorSetup(motorPort);   //初始化马达端口
     ulterSetup(ulterPort);   //初始化超声波端口
     senSetup(senPort);       //初始化光敏电阻端口
-    for(int i=0; i<=2; i++)  //发射信号
-        ulterSend(i);
 }
 
 void loop()
 {
-    stateTime[RECEIVE][0] = float(pulseIn(ulterPort[0][0], HIGH)); //等待前方信号
+    //定义端口
+    const static int * UFRONT = ulterport[0];
+    const static int * ULEFT = ulterport[1];
+    const static int * URIGHT = ulterport[2];
+
+    //事件树
+    if (ulterDistance(UFRONT) < 10)
+    {
 #ifdef DEBUG
-/*    serial.println("Here is statetime");
-    for (int i=0; i<2; i++){
-    for(int j=0; j<3; j++)
-        serial.print(stateTime[i][j]);
-    serial.println();
-  }*/
+        Serial.println("Go forward");
+#else
+        motorControl(motorPort, PARK);
 #endif
-    if((stateTime[SEND][0]-stateTime[RECEIVE][0]) > 600)
-        motorControl(motorPort, FORWARD);
-    else if((stateTime[SEND][1]-stateTime[RECEIVE][1]) < 600)
-        motorControl(motorPort, RIGHT);
-    else if((stateTime[SEND][2]-stateTime[RECEIVE][2]) < 600)
-        motorControl(motorPort, LEFT);
+        if (ulterDistance(ULEFT) < 10)
+        {
+            if (ulterDistance(UFRONT) < 10)
+#ifdef DEBUG
+                Serial.println("Oh, I am back");
+#else
+                motorControl(motorPort, BACK);
+#endif
+            else
+#ifdef DEBUG
+                Serial.println("Turn right now");
+#else
+                motorControl(motorPort, RIGHT);
+#endif
+        }
+        else
+#ifdef DEBUG
+            Serial.println("Turn left now");
+#else
+            motorControl(motorPort, LEFT);
+#endif
+    }
     else
         motorControl(motorPort, FORWARD);
 }
