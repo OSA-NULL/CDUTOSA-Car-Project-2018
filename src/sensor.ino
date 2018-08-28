@@ -1,26 +1,25 @@
 #include "sensor.h"
 #include "debug.h"
 
-unsigned long stateTime[2][3];
-
 void
-ulterSetup(int port[][3])
+ulterSetup(int port[][2])
 {
     for(int i=0; i<=2; i++)
         pinMode(port[0][i],OUTPUT);
     pinMode(port[1][0],INPUT);
-    for(int i=1; i <= 2; i++){
-        pinMode(port[RECEIVE][i],INPUT_PULLUP);
-//      attachInterrupt(digitalPinToInterrupt(port[RECEIVE][i]), stateAlternate, CHANGE);
+/*    for(int i=1; i <= 2; i++){
+        pinMode(port[1][i],INPUT_PULLUP);
+      attachInterrupt(digitalPinToInterrupt(port[RECEIVE][i]), stateAlternate, CHANGE);
     }
+    */
 }
 
 float
 ulterDistance(int * port)
 {
     //定义端口
-    const static int TRIG = port[0];
-    const static int ECHO = port[1];
+    static int TRIG = port[0];
+    static int ECHO = port[1];
     //定义变量
     float waitTime = 0;
     float distance = 0;

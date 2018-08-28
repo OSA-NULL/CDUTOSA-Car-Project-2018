@@ -4,15 +4,15 @@
 #include "debug.h"
 
 //小车马达端口 [右前，右后，左前，左后]
-const int motorPort[] = {10, 11, 5, 6};
+int motorPort[] = {10, 11, 5, 6};
 //小车测距端口 [Trig(前，左，右), Echo(前，左，右)]
-const int ulterPort[][2] = {
+int ulterPort[][2] = {
     {7, A1},
     {8, 3},
     {9, 2},
 };
 //小车测光端口 [输入]
-const int senPort = A0;
+int senPort = A0;
 
 void setup()
 {
@@ -27,9 +27,9 @@ void setup()
 void loop()
 {
     //定义端口
-    const static int * UFRONT = ulterport[0];
-    const static int * ULEFT = ulterport[1];
-    const static int * URIGHT = ulterport[2];
+    int * UFRONT = ulterPort[0];
+    int * ULEFT = ulterPort[1];
+    int * URIGHT = ulterPort[2];
 
     //事件树
     if (ulterDistance(UFRONT) < 10)
