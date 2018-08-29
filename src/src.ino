@@ -35,16 +35,39 @@ void loop()
     float d_uright = 0;
     float d_uleft = 0;
     //测距
-    d_ufront= ulterdistance(uright);
-    d_uright = ulterdistance(uright);
+    d_ufront= ulterDistance(UFRONT);
+    d_uright = ulterDistance(URIGHT);
     d_uleft = ulterDistance(ULEFT);
     //事件树
-    if (d_ufront < 15.0)
-        motorControl(motorPort, BACK);
+    motorControl(motorPort, PARK);
+    if (d_ufront < 15.0 )
+    {
+        if(d_uleft < 15.0 && d_uright < 15.0)
+        {
+            motorControl(motorPort, BACK);
+            delay(500);
+        }
+        else if(d_uleft < d_uright)
+              {
+                  motorControl(motorPort, RIGHT);
+                  delay(500);
+              }
+              else
+              {
+                  motorControl(motorPort, LEFT);
+                  delay(500);
+              }
+    }
     if (d_uleft < 15.0)
-        motorControl(motorPort, LEFT);
-
-    if (d_uright < 15.0)
+    {
         motorControl(motorPort, RIGHT);
-    delay(500);
+        delay(500);
+    }
+    if (d_uright < 15.0)
+    {
+        motorControl(motorPort, LEFT);
+        delay(500);
+    }
+    motorControl(motorPort, FORWARD);
+
 }
