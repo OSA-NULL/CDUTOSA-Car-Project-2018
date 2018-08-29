@@ -31,65 +31,20 @@ void loop()
     const int * ULEFT = ulterPort[1];
     const int * URIGHT = ulterPort[2];
 
+    float d_ufront = 0;
     float d_uright = 0;
     float d_uleft = 0;
-
+    //测距
+    d_ufront= ulterdistance(uright);
+    d_uright = ulterdistance(uright);
+    d_uleft = ulterDistance(ULEFT);
     //事件树
-    if (ulterDistance(UFRONT) < 15.0)
-    {
-#ifdef DEBUG
-        Serial.println("WFO");
-#else
-        motorControl(motorPort, PARK);
-#endif
-        d_uright = ulterDistance(URIGHT);
-        d_uleft = ulterDistance(ULEFT);
-        if (d_uleft < 15.0)
-        {
-            if (d_uright < 15.0)
-#ifdef DEBUG
-                Serial.println("Oh, I am back");
-#else
-            { 
-              motorControl(motorPort, BACK);
-                delay(500); 
-            }
-                /*if (d_uright < d_uleft)
-                {
-                    motorControl(motorPort, LEFT);
-                    delay(500);
-                }
-                else
-                {
-                    motorControl(motorPort, RIGHT);
-                    delay(500);
-                }
-            }*/
-#endif
-            else
-#ifdef DEBUG
-                Serial.println("Turn right now");
-#else
-            {
-                motorControl(motorPort, RIGHT);
-                delay(300);//try
-            }
-#endif
-        }
-        else
-#ifdef DEBUG
-            Serial.println("Turn left now");
-#else
-       {
-            motorControl(motorPort, LEFT);
-            delay(300);//try
-       }
-#endif
-    }
-    else
-#ifdef DEBUG
-            Serial.println("Go forward");
-#else
-        motorControl(motorPort, FORWARD);
-#endif
+    if (d_ufront < 15.0)
+        motorControl(motorPort, BACK);
+    if (d_uleft < 15.0)
+        motorControl(motorPort, LEFT);
+
+    if (d_uright < 15.0)
+        motorControl(motorPort, RIGHT);
+    delay(500);
 }
