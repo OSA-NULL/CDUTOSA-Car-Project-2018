@@ -19,7 +19,7 @@ typedef enum Directions  direction_t;
  *     无
  */
 void
-motorControl(int* port, direction_t direction);
+motorControl(const int* port, direction_t direction);
 
 /*
  * void motorSetup(int port[])
@@ -31,7 +31,7 @@ motorControl(int* port, direction_t direction);
  *     无
  */
 inline void 
-motorSetup(int* port)
+motorSetup(const int* port)
 {
     int i = 0;
     for(; i < 4; i++){

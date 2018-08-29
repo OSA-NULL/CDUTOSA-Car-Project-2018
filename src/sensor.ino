@@ -2,11 +2,13 @@
 #include "debug.h"
 
 void
-ulterSetup(int port[][2])
+ulterSetup(const int port[][2])
 {
     for(int i=0; i<=2; i++)
+    {
         pinMode(port[0][i],OUTPUT);
-    pinMode(port[1][0],INPUT);
+        pinMode(port[1][i],INPUT);
+    }
 /*    for(int i=1; i <= 2; i++){
         pinMode(port[1][i],INPUT_PULLUP);
       attachInterrupt(digitalPinToInterrupt(port[RECEIVE][i]), stateAlternate, CHANGE);
@@ -15,24 +17,25 @@ ulterSetup(int port[][2])
 }
 
 float
-ulterDistance(int * port)
+ulterDistance(const int * port)
 {
     //定义端口
-    static int TRIG = port[0];
-    static int ECHO = port[1];
+    int TRIG = port[0];
+    int ECHO = port[1];
     //定义变量
-    float waitTime = 0;
-    float distance = 0;
+    float waitTime;
+    float distance;
     //TRIG 发送信号
     digitalWrite(TRIG, LOW);
     delayMicroseconds(2);
     digitalWrite(TRIG,HIGH);
     delayMicroseconds(10);
     // 等待回声
-    waitTime = float(pulseIn(ECHO, HIGH,30000));
+    waitTime = float(pulseIn(ECHO, HIGH));//time 
+    Serial.println(waitTime);
     // 计算距离
     distance = (waitTime * 17)/1000;
-#ifdef Debug
+#ifdef DEBUG
     Serial.print(distance);
     Serial.print("cm");
 #endif

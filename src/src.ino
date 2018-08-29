@@ -4,15 +4,15 @@
 #include "debug.h"
 
 //小车马达端口 [右前，右后，左前，左后]
-int motorPort[] = {10, 11, 5, 6};
+const int motorPort[] = {10, 11, 5, 6};
 //小车测距端口 [Trig(前，左，右), Echo(前，左，右)]
-int ulterPort[][2] = {
+const int ulterPort[][2] = {
     {7, A1},
     {8, 3},
     {9, 2},
 };
 //小车测光端口 [输入]
-int senPort = A0;
+const int senPort = A0;
 
 void setup()
 {
@@ -27,21 +27,21 @@ void setup()
 void loop()
 {
     //定义端口
-    int * UFRONT = ulterPort[0];
-    int * ULEFT = ulterPort[1];
-    int * URIGHT = ulterPort[2];
+    const int * UFRONT = ulterPort[0];
+    const int * ULEFT = ulterPort[1];
+    const int * URIGHT = ulterPort[2];
 
     //事件树
-    if (ulterDistance(UFRONT) < 10)
+    if (ulterDistance(UFRONT) < 10.0)
     {
 #ifdef DEBUG
-        Serial.println("Go forward");
+        Serial.println("Waiting for order");
 #else
         motorControl(motorPort, PARK);
 #endif
-        if (ulterDistance(ULEFT) < 10)
+        if (ulterDistance(ULEFT) < 10.0)
         {
-            if (ulterDistance(UFRONT) < 10)
+            if (ulterDistance(UFRONT) < 10.0)
 #ifdef DEBUG
                 Serial.println("Oh, I am back");
 #else
@@ -62,5 +62,9 @@ void loop()
 #endif
     }
     else
+#ifdef DEBUG
+            Serial.println("Go forward");
+#else
         motorControl(motorPort, FORWARD);
+#endif
 }

@@ -11,7 +11,7 @@
  * 返回:
  *     无
  */
-void ulterSetup(int port[][2]);
+void ulterSetup(const int port[][2]);
 /*
  * float ulterDistance(int echo);
  * 功能：
@@ -21,7 +21,7 @@ void ulterSetup(int port[][2]);
  * 返回：
  *     障碍物距离（cm）
  */
-float ulterDistance(int * port);
+float ulterDistance(const int * port);
 /***************************************************************
  *sensitization    光敏电阻模块
  **************************************************************/
@@ -36,7 +36,7 @@ float ulterDistance(int * port);
  *     无
  */
 inline void
-senSetup(int port)
+senSetup(const int port)
 {
     pinMode(port,INPUT);
 }
@@ -51,7 +51,7 @@ senSetup(int port)
  *     光线强度测量值
  */
 inline int
-senLight(int port)
+senLight(const int port)
 {
     return(analogRead(port));
 }

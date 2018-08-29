@@ -1,7 +1,7 @@
 #include "motor_ctl.h"
 
 void
-motorControl(int* port, direction_t direction)
+motorControl(const int* port, direction_t direction)
 {
     int direction_arr[][4] = {
         {128,   0, 128,   0},
