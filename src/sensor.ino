@@ -6,14 +6,9 @@ ulterSetup(const int port[][2])
 {
     for(int i=0; i<=2; i++)
     {
-        pinMode(port[0][i],OUTPUT);
-        pinMode(port[1][i],INPUT);
+        pinMode(port[i][0],OUTPUT);
+        pinMode(port[i][1],INPUT);
     }
-/*    for(int i=1; i <= 2; i++){
-        pinMode(port[1][i],INPUT_PULLUP);
-      attachInterrupt(digitalPinToInterrupt(port[RECEIVE][i]), stateAlternate, CHANGE);
-    }
-    */
 }
 
 float
@@ -31,8 +26,7 @@ ulterDistance(const int * port)
     digitalWrite(TRIG,HIGH);
     delayMicroseconds(10);
     // 等待回声
-    waitTime = float(pulseIn(ECHO, HIGH));//time 
-    Serial.println(waitTime);
+    waitTime = float(pulseIn(ECHO, HIGH, 30000));//time 
     // 计算距离
     distance = (waitTime * 17)/1000;
 #ifdef DEBUG

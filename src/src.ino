@@ -31,34 +31,59 @@ void loop()
     const int * ULEFT = ulterPort[1];
     const int * URIGHT = ulterPort[2];
 
+    float d_uright = 0;
+    float d_uleft = 0;
+
     //事件树
-    if (ulterDistance(UFRONT) < 10.0)
+    if (ulterDistance(UFRONT) < 15.0)
     {
 #ifdef DEBUG
-        Serial.println("Waiting for order");
+        Serial.println("WFO");
 #else
         motorControl(motorPort, PARK);
 #endif
-        if (ulterDistance(ULEFT) < 10.0)
+        d_uright = ulterDistance(URIGHT);
+        d_uleft = ulterDistance(ULEFT);
+        if (d_uleft < 15.0)
         {
-            if (ulterDistance(UFRONT) < 10.0)
+            if (d_uright < 15.0)
 #ifdef DEBUG
                 Serial.println("Oh, I am back");
 #else
-                motorControl(motorPort, BACK);
+            { 
+              motorControl(motorPort, BACK);
+                delay(500); 
+            }
+                /*if (d_uright < d_uleft)
+                {
+                    motorControl(motorPort, LEFT);
+                    delay(500);
+                }
+                else
+                {
+                    motorControl(motorPort, RIGHT);
+                    delay(500);
+                }
+            }*/
 #endif
             else
 #ifdef DEBUG
                 Serial.println("Turn right now");
 #else
+            {
                 motorControl(motorPort, RIGHT);
+                delay(300);//try
+            }
 #endif
         }
         else
 #ifdef DEBUG
             Serial.println("Turn left now");
 #else
+       {
             motorControl(motorPort, LEFT);
+            delay(300);//try
+       }
 #endif
     }
     else

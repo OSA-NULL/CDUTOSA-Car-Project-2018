@@ -4,7 +4,7 @@
 #include <Arduino.h>
 
 enum Directions{
-    FORWARD, BACK, LEFT, RIGHT, PARK, CRAZY
+    FORWARD, BACK, RIGHT, LEFT, PARK, CRAZY
 };
 typedef enum Directions  direction_t;
 
