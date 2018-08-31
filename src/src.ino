@@ -39,35 +39,62 @@ void loop()
     d_uright = ulterDistance(URIGHT);
     d_uleft = ulterDistance(ULEFT);
     //事件树
-    motorControl(motorPort, PARK);
-    if (d_ufront < 15.0 )
+#ifdef DEBUG
+    Serial.println('park');
+#else
+    motorControl(motorPort, PARK); //等待命令
+#endif
+    if (d_ufront < 15.0 ) //前方遇阻
     {
-        if(d_uleft < 15.0 && d_uright < 15.0)
+        if(d_uleft < 15.0 && d_uright < 15.0) //左右同时受阻
         {
-            motorControl(motorPort, BACK);
+#ifdef DEBUG
+            Serial.println('                        back');
+#else
+            motorControl(motorPort, BACK); //后退
             delay(500);
+#endif
         }
-        else if(d_uleft < d_uright)
-              {
-                  motorControl(motorPort, RIGHT);
-                  delay(500);
-              }
-              else
-              {
-                  motorControl(motorPort, LEFT);
-                  delay(500);
-              }
+        else if(d_uleft < d_uright) //右大于左
+        {
+#ifdef DEBUG
+            Serial.println('                  right');
+#else
+            motorControl(motorPort, RIGHT); //右转
+            delay(500);
+#endif
+        }
+        else
+        {
+#ifdef DEBUG
+            Serial.println('            left');
+#else
+            motorControl(motorPort, LEFT); //左转
+            delay(500);
+#endif
+        }
     }
-    if (d_uleft < 15.0)
+    if (d_uleft < 15.0) //单单左受阻
     {
-        motorControl(motorPort, RIGHT);
+#ifdef DEBUG
+        Serial.println('                  right');
+#else
+        motorControl(motorPort, RIGHT); //右转
         delay(500);
+#endif
     }
-    if (d_uright < 15.0)
+    if (d_uright < 15.0) //单单右受阻
     {
-        motorControl(motorPort, LEFT);
+#ifdef DEBUG
+        Serial.println('            left');
+#else
+        motorControl(motorPort, LEFT); //左转
         delay(500);
+#endif
     }
-    motorControl(motorPort, FORWARD);
-
+#ifdef DEBUG
+    Serial.println('      front');
+#else
+    motorControl(motorPort, FORWARD); //前进
+#endif
 }
