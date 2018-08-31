@@ -10,19 +10,29 @@
 #include <nRF24L01.h>
 #include <RF24.h>
 
-RF24 radio(7, 8); // CE, CSN
-const byte address[6] = "00001";
+RF24 rf24(7, 8); // CE, CSN
+
+const byte addr[6] = "1Node";
+const byte pipe = 1;
+
 void setup() {
   Serial.begin(9600);
-  radio.begin();
-  radio.openReadingPipe(0, address);
-  radio.setPALevel(RF24_PA_MIN);
-  radio.startListening();
+  rf24.begin();
+  rf24.setChannel(83);
+  rf24.setPALevel(RF24_PA_MIN);
+  rf24.setDataRate(RF24_250KBPS);
+  rf24.openReadingPipe(pipe, addr);
+  rf24.startListening();
+  Serial.println("nRF24L01 ready!");
 }
+
 void loop() {
-  if (radio.available()) {
-    char text[32] = "";
-    radio.read(&text, sizeof(text));
-    Serial.println(text);
+  int digit = 0;
+  if (rf24.available(&pipe)) {
+    char msg[32] = "";
+    rf24.read(&msg, sizeof(msg));
+    rf24.read(&digit, sizeof(int));
+    Serial.println(msg);
+    Serial.print(digit);
   }
 }

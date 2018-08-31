@@ -10,16 +10,23 @@
 #include <nRF24L01.h>
 #include <RF24.h>
 
-RF24 radio(7, 8); // CE, CSN
-const byte address[6] = "00001";
+RF24 rf24(7, 8); // CE, CSN
+
+const byte addr[] = "1Node";
+const char msg[] = "The number is ";
+int digit=0;
+
 void setup() {
-  radio.begin();
-  radio.openWritingPipe(address);
-  radio.setPALevel(RF24_PA_MIN);
-  radio.stopListening();
+  rf24.begin();
+  rf24.setChannel(83);
+  rf24.openWritingPipe(addr);
+  rf24.setPALevel(RF24_PA_MIN);
+  rf24.setDataRate(RF24_250KBPS);
+  rf24.stopListening();
 }
 void loop() {
-  const char text[] = "Hello World";
-  radio.write(&text, sizeof(text));
+  rf24.write(&msg, sizeof(msg));
+  rf24.write(&digit, sizeof(int));
   delay(1000);
+  digit++;
 }
